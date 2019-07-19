@@ -71,7 +71,7 @@ class User extends Model
 
     protected function setCreateAction($action)
     {
-        if (!in_array($action, Create::getValues())) {
+        if (!in_array($action, CreateUserAction::getValues())) {
             throw new Exception('Invalid action');
         }
 
