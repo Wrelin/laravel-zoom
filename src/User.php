@@ -3,7 +3,7 @@
 namespace MacsiDigital\Zoom;
 
 use Exception;
-use MacsiDigital\Zoom\Enums\ZoomCreateUserAction;
+use MacsiDigital\Zoom\Enums\User\CreateUserAction;
 use MacsiDigital\Zoom\Support\Model;
 
 class User extends Model
@@ -71,14 +71,14 @@ class User extends Model
 
     protected function setCreateAction($action)
     {
-        if (!in_array($action, ZoomCreateUserAction::getValues())) {
+        if (!in_array($action, Create::getValues())) {
             throw new Exception('Invalid action');
         }
 
         $this->createAction = $action;
     }
 
-    public function make($attributes, $action = ZoomCreateUserAction::ACTION_CREATE)
+    public function make($attributes, $action = CreateUserAction::ACTION_CREATE)
     {
         if (!$this->createAction) {
             $this->setCreateAction($action);
@@ -91,7 +91,7 @@ class User extends Model
         return $this;
     }
 
-    public function create($attributes, $action = ZoomCreateUserAction::ACTION_CREATE)
+    public function create($attributes, $action = CreateUserAction::ACTION_CREATE)
     {
         $this->setCreateAction($action);
 

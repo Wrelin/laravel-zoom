@@ -1,10 +1,10 @@
 <?php
 
-namespace MacsiDigital\Zoom\Enums;
+namespace MacsiDigital\Zoom\Enums\User;
 
 use BenSampo\Enum\Enum;
 
-final class ZoomCreateUserAction extends Enum
+final class CreateUserAction extends Enum
 {
     const ACTION_CREATE = 'create';
     const ACTION_AUTO_CREATE = 'autoCreate';
