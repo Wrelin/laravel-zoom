@@ -362,7 +362,7 @@ abstract class Model
                 if (is_object($value)) {
                     $attributes[$key] = $value->createAttributes();
                 } else {
-                    if ($value != '') {
+                    if ($value !== '') {
                         $attributes[$key] = $value;
                     }
                 }
@@ -380,7 +380,7 @@ abstract class Model
                 if (is_object($value)) {
                     $attributes[$key] = $value->updateAttributes();
                 } else {
-                    if ($value != '') {
+                    if ($value !== '') {
                         $attributes[$key] = $value;
                     }
                 }
