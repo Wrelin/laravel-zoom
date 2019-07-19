@@ -112,7 +112,7 @@ class User extends Model
             if (in_array('post', $this->methods)) {
                 $attributes = ['action' => $this->createAction, 'user_info' => $this->createAttributes()];
                 $this->response = $this->client->post($this->getEndpoint(), $attributes);
-                if ($this->response->getStatusCode() == '200') {
+                if ($this->response->getStatusCode() == '201') {
                     $saved_item = $this->collect($this->response->getContents())->first();
                     $this->$index = $saved_item->$index;
 
