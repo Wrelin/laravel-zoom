@@ -80,7 +80,9 @@ class User extends Model
 
     public function make($attributes, $action = ZoomCreateUserAction::ACTION_CREATE)
     {
-        $this->setCreateAction($action);
+        if (!$this->createAction) {
+            $this->setCreateAction($action);
+        }
 
         foreach ($attributes as $attribute => $value) {
             $this->$attribute = $value;
