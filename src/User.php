@@ -3,6 +3,7 @@
 namespace MacsiDigital\Zoom;
 
 use Exception;
+use MacsiDigital\Zoom\Enums\ZoomCreateUserAction;
 use MacsiDigital\Zoom\Support\Model;
 
 class User extends Model
@@ -66,6 +67,35 @@ class User extends Model
         'cms_user_id',
     ];
 
+    protected $createAction = '';
+
+    protected function setCreateAction($action)
+    {
+        if (!in_array($action, ZoomCreateUserAction::getValues())) {
+            throw new Exception('Invalid action');
+        }
+
+        $this->createAction = $action;
+    }
+
+    public function make($attributes, $action = ZoomCreateUserAction::ACTION_CREATE)
+    {
+        $this->setCreateAction($action);
+
+        foreach ($attributes as $attribute => $value) {
+            $this->$attribute = $value;
+        }
+
+        return $this;
+    }
+
+    public function create($attributes, $action = ZoomCreateUserAction::ACTION_CREATE)
+    {
+        $this->setCreateAction($action);
+
+        return parent::create($attributes);
+    }
+
     public function save()
     {
         $index = $this->GetKey();
@@ -80,7 +110,7 @@ class User extends Model
             }
         } else {
             if (in_array('post', $this->methods)) {
-                $attributes = ['action' => 'create', 'user_info' => $this->createAttributes()];
+                $attributes = ['action' => $this->createAction, 'user_info' => $this->createAttributes()];
                 $this->response = $this->client->post($this->getEndpoint(), $attributes);
                 if ($this->response->getStatusCode() == '200') {
                     $saved_item = $this->collect($this->response->getContents())->first();
