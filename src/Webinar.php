@@ -74,7 +74,7 @@ class Webinar extends Model
         $this->attributes['recurrance'] = $recurance;
     }
 
-    public function addSettings(MeetingSetting $settings)
+    public function addSettings(WebinarSetting $settings)
     {
         $this->attributes['settings'] = $settings;
     }
