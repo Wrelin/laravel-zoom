@@ -22,9 +22,13 @@ abstract class Model
 
     protected $client;
 
-    public function __construct()
+    public function __construct($attributes = null)
     {
         $this->client = app()->zoom->client;
+
+        if ($attributes) {
+            $this->fill($attributes);
+        }
     }
 
     /**
