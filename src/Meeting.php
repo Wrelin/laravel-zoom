@@ -188,4 +188,14 @@ class Meeting extends Model
             throw new Exception($this->response->getStatusCode().' status code');
         }
     }
+
+    public function updateStatus($action = 'end')
+    {
+        $this->response = $this->client->put("/meetings/{$this->id}/status", ['action' => $action]);
+        if ($this->response->getStatusCode() == '204') {
+            return $this->response->getContents();
+        } else {
+            throw new Exception($this->response->getStatusCode().' status code');
+        }
+    }
 }
