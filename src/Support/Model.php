@@ -83,9 +83,24 @@ abstract class Model
         return false;
     }
 
-    public function getAttributes()
+    public function getAttributes($withNested = false, $withoutEmpty = false)
     {
-        return $this->attributes;
+        if (!$withNested && !$withoutEmpty) {
+            return $this->attributes;
+        }
+
+        $result = [];
+        foreach ($this->attributes as $attributeName => $attributeValue) {
+            if ($withoutEmpty && $attributeValue === '') {
+                continue;
+            }
+
+            $result[$attributeName] = ($attributeValue instanceof Model && $withNested)
+                ? $attributeValue->getAttributes(true)
+                : $attributeValue;
+        }
+
+        return $result;
     }
 
     /**
