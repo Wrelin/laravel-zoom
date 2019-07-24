@@ -191,7 +191,7 @@ class Meeting extends Model
 
     public function updateStatus($action = 'end')
     {
-        $this->response = $this->client->put("/meetings/{$this->id}/status", ['action' => $action]);
+        $this->response = $this->client->put("meetings/{$this->id}/status", ['action' => $action]);
         if ($this->response->getStatusCode() == '204') {
             return $this->response->getContents();
         } else {
