@@ -20,6 +20,7 @@ abstract class Model
     const NODE_NAME = '';
     const KEY_FIELD = '';
 
+    /** @var  GuzzleHttp\Client $client */
     protected $client;
 
     public function __construct($attributes = null)
