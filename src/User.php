@@ -104,7 +104,7 @@ class User extends Model
         if ($this->hasID()) {
             if (in_array('put', $this->methods)) {
                 $this->response = $this->client->patch("{$this->getEndpoint()}/{$this->id}", $this->updateAttributes());
-                if ($this->response->getStatusCode() == '200') {
+                if ($this->response->getStatusCode() == '204') {
                     return $this->response->getContents();
                 } else {
                     throw new Exception($this->response->getStatusCode().' status code');
