@@ -182,7 +182,7 @@ class Meeting extends Model
     public function approveRegistrant($registrant)
     {
         $this->response = $this->client->put("meetings/{$this->id}/registrants/status", ['action' => 'approve', 'registrant' => [['email' => $registrant->email]]]);
-        if ($this->response->getStatusCode() == '200') {
+        if ($this->response->getStatusCode() == '204') {
             return $this->response->getContents();
         } else {
             throw new Exception($this->response->getStatusCode().' status code');
