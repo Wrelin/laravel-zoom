@@ -4,9 +4,12 @@ namespace MacsiDigital\Zoom;
 
 class UserSettings
 {
-    public $featureAttributes = [
-        'feature' => [
-            'webinar' => true,
-        ],
-    ];
+    public static function getWebinarSettings(bool $webinarSetting = true): array
+    {
+        return [
+            'feature' => [
+                'webinar' => $webinarSetting,
+            ],
+        ];
+    }
 }

@@ -142,16 +142,16 @@ class User extends Model
         return $webinar;
     }
 
-    public function updateUserSettings(array $settings)
+    public function updateSettings(array $settings)
     {
         if ($this->hasID()) {
             $this->response = $this->client->patch("{$this->getEndpoint()}/{$this->getID()}/settings", $settings);
 
             if ($this->response->getStatusCode() == '204') {
                 return $this->response->getContents();
-            } else {
-                throw new Exception($this->response->getStatusCode().' status code.');
             }
+
+            throw new Exception($this->response->getStatusCode().' status code.');
         }
 
         return false;
