@@ -10,7 +10,7 @@ class Request
 {
     protected $client;
 
-    protected $defaultTimeout = 10;
+    private const DEFAULT_TIMEOUT = 10;
 
     public function bootPrivateApplication()
     {
@@ -22,7 +22,7 @@ class Request
                 'Accept' => 'application/json',
                 'Origin' => 'https://developer.zoom.us',
             ],
-            'timeout' => $this->defaultTimeout,
+            'timeout' => self::DEFAULT_TIMEOUT,
         ];
         $this->client = new Client($options);
 
