@@ -44,8 +44,11 @@ class Request
     {
         try {
             return $this->client->request('GET', $end_point);
-        } catch (Exception $e) {
-            return $e->getResponse();
+        } catch (RequestException $e) {
+            if ($e->hasResponse()) {
+                return $e->getResponse();
+            }
+            throw new Exception('Timeout Exception');
         }
     }
 
@@ -55,8 +58,11 @@ class Request
             return $this->client->post($end_point, [
                 'body' => $this->prepareFields($fields),
             ]);
-        } catch (Exception $e) {
-            return $e->getResponse();
+        } catch (RequestException $e) {
+            if ($e->hasResponse()) {
+                return $e->getResponse();
+            }
+            throw new Exception('Timeout Exception');
         }
     }
 
@@ -66,8 +72,11 @@ class Request
             return $this->client->patch($end_point, [
                 'body' => $this->prepareFields($fields),
             ]);
-        } catch (Exception $e) {
-            return $e->getResponse();
+        } catch (RequestException $e) {
+            if ($e->hasResponse()) {
+                return $e->getResponse();
+            }
+            throw new Exception('Timeout Exception');
         }
     }
 
@@ -77,16 +86,26 @@ class Request
             return $this->client->put($end_point, [
                 'body' => $this->prepareFields($fields),
             ]);
-        } catch (Exception $e) {
-            return $e->getResponse();
+        } catch (RequestException $e) {
+            if ($e->hasResponse()) {
+                return $e->getResponse();
+            }
+            throw new Exception('Timeout Exception');
         }
     }
 
     public function delete($end_point)
     {
-        return $this->client->delete($end_point, [
-            'headers' => $this->headers,
-        ]);
+        try {
+            return $this->client->delete($end_point, [
+                'headers' => $this->headers,
+            ]);
+        } catch (RequestException $e) {
+            if ($e->hasResponse()) {
+                return $e->getResponse();
+            }
+            throw new Exception('Timeout Exception');
+        }
     }
 
     private function prepareFields($fields)
