@@ -5,6 +5,7 @@ namespace MacsiDigital\Zoom\Support;
 use Exception;
 use Firebase\JWT\JWT;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 
 class Request
 {
@@ -48,7 +49,7 @@ class Request
             if ($e->hasResponse()) {
                 return $e->getResponse();
             }
-            throw new Exception('Timeout Exception');
+            throw new Exception('Undefined Exception: ' . $e->getMessage());
         }
     }
 
@@ -62,7 +63,7 @@ class Request
             if ($e->hasResponse()) {
                 return $e->getResponse();
             }
-            throw new Exception('Timeout Exception');
+            throw new Exception('Undefined Exception: ' . $e->getMessage());
         }
     }
 
@@ -76,7 +77,7 @@ class Request
             if ($e->hasResponse()) {
                 return $e->getResponse();
             }
-            throw new Exception('Timeout Exception');
+            throw new Exception('Undefined Exception: ' . $e->getMessage());
         }
     }
 
@@ -90,7 +91,7 @@ class Request
             if ($e->hasResponse()) {
                 return $e->getResponse();
             }
-            throw new Exception('Timeout Exception');
+            throw new Exception('Undefined Exception: ' . $e->getMessage());
         }
     }
 
@@ -104,7 +105,7 @@ class Request
             if ($e->hasResponse()) {
                 return $e->getResponse();
             }
-            throw new Exception('Timeout Exception');
+            throw new Exception('Undefined Exception: ' . $e->getMessage());
         }
     }
 
